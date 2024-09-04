@@ -64,13 +64,14 @@ class _MedicinesScreenState extends State<MedicinesScreen> {
         actions: [
           Padding(
             padding: EdgeInsets.all(isLargeScreen ? 16.0 : 8.0),
-            child: CircleAvatar(
+            child: const CircleAvatar(
+              backgroundColor: Colors.transparent,
               backgroundImage: AssetImage('assets/img/pregmed_logo.png'), // Replace with your logo asset
             ),
           ),
         ],
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(1),
+          preferredSize: const Size.fromHeight(1),
           child: Container(
             color: Colors.black, // Divider color
             height: 1,

@@ -1,9 +1,12 @@
-// ignore_for_file: unused_local_variable
-
 import 'package:flutter/material.dart';
 import 'package:pregmed_project/Components/ImportantNote.dart';
+import 'package:pregmed_project/Home/diet_nutrition.dart';
+import 'package:pregmed_project/Home/exercise_yoga.dart';
+import 'package:pregmed_project/Home/fun_activities_screen.dart';
+import 'package:pregmed_project/Home/guides_screen.dart';
 import 'package:pregmed_project/Home/literatures_articals_screen.dart';
 import 'package:pregmed_project/Home/medicines_screen.dart';
+import 'package:pregmed_project/Home/faq_screen.dart'; // Import the FaqScreen
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -34,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
+    // ignore: unused_local_variable
     final screenHeight = MediaQuery.of(context).size.height;
 
     return Scaffold(
@@ -63,14 +67,28 @@ class _HomeScreenState extends State<HomeScreen> {
           padding: const EdgeInsets.all(8.0), // Adjusted padding for better responsiveness
           child: Image.asset('assets/img/pregmed_logo.png'), // Replace with your logo asset
         ),
-        actions: const [
+        actions: [
           Padding(
-            padding: EdgeInsets.all(8.0),
-            child: CircleAvatar(
-              backgroundImage: AssetImage('assets/img/pregmed_logo.png'),
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              width: 40.0, // Width of the Container
+              height: 40.0, // Height of the Container
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: Colors.transparent, // Transparent background
+                border: Border.all(
+                    color: Colors.black, width: 2.0), // Black outline
+              ),
+              child: CircleAvatar(
+                backgroundColor: Colors.transparent, // Transparent background
+                radius: 20, // Radius of the CircleAvatar
+                child: Image.asset(
+                    'assets/img/pregmed_logo.png'), // App logo image
+              ),
             ),
           ),
         ],
+
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1),
           child: Container(
@@ -105,17 +123,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  _buildButton('Index of Medicines', () => navigateToScreen(MedicinesScreen())),
+                  _buildButton('Index of Medicines', () => navigateToScreen(const MedicinesScreen())),
                   const SizedBox(height: 16), // Space between buttons
-                  _buildButton('Literatures & Articles', () => navigateToScreen(LiteraturesArticalsScreen())),
+                  _buildButton('Literatures & Articles', () => navigateToScreen(const LiteraturesArticalsScreen())),
                   const SizedBox(height: 16), // Space between buttons
-                  _buildButton('Exercise & Yoga', () => navigateToScreen(MedicinesScreen())),
+                  _buildButton('Exercise & Yoga', () => navigateToScreen(const ExerciseYoga())),
                   const SizedBox(height: 16), // Space between buttons
-                  _buildButton('Diet & Nutrition', () => navigateToScreen(MedicinesScreen())),
+                  _buildButton('Diet & Nutrition', () => navigateToScreen(const DietNutrition())),
                   const SizedBox(height: 16), // Space between buttons
-                  _buildButton('Fun activities', () => navigateToScreen(MedicinesScreen())),
+                  _buildButton('Fun activities', () => navigateToScreen(const FunActivitiesScreen())),
                   const SizedBox(height: 16), // Space between buttons
-                  _buildButton('Guides', () => navigateToScreen(MedicinesScreen())),
+                  _buildButton('Guides', () => navigateToScreen(const GuidesScreen())),
                   const SizedBox(height: 32), // Space before icon buttons
 
                   // Horizontal Icon Buttons
@@ -123,12 +141,12 @@ class _HomeScreenState extends State<HomeScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       _buildIconButton(Icons.help_outline_sharp, 'FAQ', () {
-                        // Action for FAQ button
+                        navigateToScreen(const FaqScreen()); // Navigate to FAQ screen
                       }),
-                      _buildIconButton(Icons.chat_bubble_outline, 'Start Chat...', () {
+                      _buildIconButton(Icons.chat_outlined, 'Start Chat...', () {
                         // Action for Start Chat button
                       }),
-                      _buildIconButton(Icons.feedback_outlined, 'Feedback', () {
+                      _buildIconButton(Icons.feedback_rounded, 'Feedback', () {
                         // Action for Feedback button
                       }),
                     ],

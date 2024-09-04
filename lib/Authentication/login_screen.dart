@@ -17,6 +17,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
 
   bool _isEmailValid = true;
   bool _isPasswordValid = true;
+  bool _isLoginAttempted = false; // Track if login attempt has been made
   late AnimationController _animationController;
   late Animation<double> _animation;
 
@@ -44,6 +45,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
     setState(() {
       _isEmailValid = _emailController.text.contains('@');
       _isPasswordValid = _passwordController.text.isNotEmpty;
+      _isLoginAttempted = true; // Indicate that login attempt has been made
     });
 
     if (_isEmailValid && _isPasswordValid) {
@@ -108,7 +110,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide(color: _emailFocusNode.hasFocus ? Colors.green : Colors.black),
                                 ),
-                                errorText: _isEmailValid ? null : 'Invalid Email',
+                                errorText: _isLoginAttempted && !_isEmailValid ? 'Invalid Email' : null,
                                 errorBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: const BorderSide(color: Colors.red),
@@ -135,7 +137,7 @@ class _LoginScreenState extends State<LoginScreen> with SingleTickerProviderStat
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: BorderSide(color: _passwordFocusNode.hasFocus ? Colors.green : Colors.black),
                                 ),
-                                errorText: _isPasswordValid ? null : 'Incorrect Password',
+                                errorText: _isLoginAttempted && !_isPasswordValid ? 'Incorrect Password' : null,
                                 errorBorder: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   borderSide: const BorderSide(color: Colors.red),

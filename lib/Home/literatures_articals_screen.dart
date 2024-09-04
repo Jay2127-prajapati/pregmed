@@ -40,7 +40,8 @@ class _LiteraturesArticalsScreenState extends State<LiteraturesArticalsScreen> {
         actions: [
           Padding(
             padding: EdgeInsets.all(screenWidth * 0.02), // Responsive padding
-            child: CircleAvatar(
+            child: const CircleAvatar(
+              backgroundColor: Colors.transparent,
               backgroundImage: AssetImage('assets/img/pregmed_logo.png'), // Replace with your logo asset
             ),
           ),
@@ -64,19 +65,19 @@ class _LiteraturesArticalsScreenState extends State<LiteraturesArticalsScreen> {
               child: DropdownButton<String>(
                 value: _selectedReligion,
                 items: [
-                  DropdownMenuItem(
+                  const DropdownMenuItem(
                     value: 'Select Religion',
                     child: Text('Select Religion'),
                   ),
-                  DropdownMenuItem(
+                  const DropdownMenuItem(
                     value: 'Religion 1',
                     child: Text('Religion 1'),
                   ),
-                  DropdownMenuItem(
+                  const DropdownMenuItem(
                     value: 'Religion 2',
                     child: Text('Religion 2'),
                   ),
-                  DropdownMenuItem(
+                  const DropdownMenuItem(
                     value: 'Religion 3',
                     child: Text('Religion 3'),
                   ),
@@ -108,7 +109,7 @@ class _LiteraturesArticalsScreenState extends State<LiteraturesArticalsScreen> {
               thickness: 1.5,
               height: screenHeight * 0.02, // Responsive height
             ),
-            ImportantNote(), // Use the reusable ImportantNote widget
+            const ImportantNote(), // Use the reusable ImportantNote widget
           ],
         ),
       ),
