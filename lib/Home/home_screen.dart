@@ -1,4 +1,8 @@
+// ignore_for_file: unused_local_variable
+
 import 'package:flutter/material.dart';
+import 'package:pregmed_project/Components/ImportantNote.dart';
+import 'package:pregmed_project/Home/literatures_articals_screen.dart';
 import 'package:pregmed_project/Home/medicines_screen.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -29,6 +33,9 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xFFc5e0b4),
@@ -39,7 +46,10 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Text(
                 getGreeting(),
-                style: const TextStyle(color: Colors.black, fontSize: 18),
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: screenWidth * 0.05, // Responsive font size
+                ),
               ),
               const SizedBox(height: 4),
               const Text(
@@ -50,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
           ),
         ),
         leading: Padding(
-          padding: const EdgeInsets.all(1.0),
+          padding: const EdgeInsets.all(8.0), // Adjusted padding for better responsiveness
           child: Image.asset('assets/img/pregmed_logo.png'), // Replace with your logo asset
         ),
         actions: const [
@@ -74,34 +84,67 @@ class _HomeScreenState extends State<HomeScreen> {
         children: [
           // Background color
           Container(
-            color: const Color(0xFFc5e0b4),
+            color: const Color(0xFFc5e0b4), // Background color
           ),
-          // Background Image
-          Positioned.fill(
-            child: Image.asset(
-              'assets/img/ladies_bg.png', // Replace with your background image asset
-              fit: BoxFit.cover,
+          // Background Image with controlled width
+          Align(
+            alignment: Alignment.topCenter,
+            child: Container(
+              width: screenWidth * 0.9, // Adjust the width as needed
+              child: Image.asset(
+                'assets/img/ladies_bg.png', // Replace with your background image asset
+                fit: BoxFit.cover,
+              ),
             ),
           ),
           // Content
           Center(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0), // Padding for left and right sides
+              padding: EdgeInsets.symmetric(horizontal: screenWidth * 0.04), // Responsive padding
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
-                  _buildButton('Button 1', () => navigateToScreen(MedicinesScreen())),
+                  _buildButton('Index of Medicines', () => navigateToScreen(MedicinesScreen())),
                   const SizedBox(height: 16), // Space between buttons
-                  _buildButton('Button 2', () => navigateToScreen(MedicinesScreen())),
+                  _buildButton('Literatures & Articles', () => navigateToScreen(LiteraturesArticalsScreen())),
                   const SizedBox(height: 16), // Space between buttons
-                  _buildButton('Button 3', () => navigateToScreen(MedicinesScreen())),
+                  _buildButton('Exercise & Yoga', () => navigateToScreen(MedicinesScreen())),
                   const SizedBox(height: 16), // Space between buttons
-                  _buildButton('Button 4', () => navigateToScreen(MedicinesScreen())),
+                  _buildButton('Diet & Nutrition', () => navigateToScreen(MedicinesScreen())),
                   const SizedBox(height: 16), // Space between buttons
-                  _buildButton('Button 5', () => navigateToScreen(MedicinesScreen())),
+                  _buildButton('Fun activities', () => navigateToScreen(MedicinesScreen())),
                   const SizedBox(height: 16), // Space between buttons
-                  _buildButton('Button 6', () => navigateToScreen(MedicinesScreen())),
+                  _buildButton('Guides', () => navigateToScreen(MedicinesScreen())),
+                  const SizedBox(height: 32), // Space before icon buttons
+
+                  // Horizontal Icon Buttons
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    children: [
+                      _buildIconButton(Icons.help_outline_sharp, 'FAQ', () {
+                        // Action for FAQ button
+                      }),
+                      _buildIconButton(Icons.chat_bubble_outline, 'Start Chat...', () {
+                        // Action for Start Chat button
+                      }),
+                      _buildIconButton(Icons.feedback_outlined, 'Feedback', () {
+                        // Action for Feedback button
+                      }),
+                    ],
+                  ),
+                  const SizedBox(height: 16), // Space before divider
+                  
+                  // Divider
+                  const Divider(
+                    color: Colors.black,
+                    thickness: 1.5,
+                  ),
+
+                  const SizedBox(height: 16), // Space before warning text
+
+                  // Warning Text Component
+                  const ImportantNote(),
                 ],
               ),
             ),
@@ -113,18 +156,45 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildButton(String text, VoidCallback onPressed) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 8.0),
+      padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.01), // Responsive padding
       child: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xFFe2f0d9), // Button background color
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(8.0),
           ),
-          minimumSize: Size(double.infinity, 48), // Full width button
+          minimumSize: Size(double.infinity, MediaQuery.of(context).size.height * 0.06), // Responsive height
         ),
         onPressed: onPressed,
-        child: Text(text),
+        child: Text(
+          text,
+          style: TextStyle(
+            color: Colors.black, // Button text color set to black
+            fontWeight: FontWeight.bold,
+            fontSize: MediaQuery.of(context).size.width * 0.04, // Responsive font size
+          ),
+        ),
       ),
+    );
+  }
+
+  Widget _buildIconButton(IconData icon, String label, VoidCallback onPressed) {
+    return Column(
+      children: [
+        IconButton(
+          icon: Icon(icon),
+          iconSize: MediaQuery.of(context).size.width * 0.09, // Responsive icon size
+          onPressed: onPressed,
+          color: Colors.black,
+        ),
+        Text(
+          label,
+          style: TextStyle(
+            fontSize: MediaQuery.of(context).size.width * 0.04, // Responsive font size
+            color: Colors.black,
+          ),
+        ),
+      ],
     );
   }
 }
